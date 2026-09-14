@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IwakPaus | Whale Collection</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#eff9ff;
+    color:#082f49;
+}
+
+/* NAVBAR */
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 7%;
+    background:#062f4f;
+}
+
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#38bdf8;
+}
+
+nav button{
+    border:0;
+    background:#0ea5e9;
+    color:white;
+    padding:11px 18px;
+    border-radius:25px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* HERO */
+.hero{
+    min-height:500px;
+    padding:80px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:
+    radial-gradient(circle at 80% 30%,#38bdf8,transparent 25%),
+    linear-gradient(135deg,#082f49,#0369a1,#0ea5e9);
+    color:white;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,75px);
+    line-height:1;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#bae6fd;
+}
+
+.hero p{
+    font-size:18px;
+    line-height:1.7;
+    color:#e0f2fe;
+}
+
+.hero-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:14px 25px;
+    background:white;
+    color:#0369a1;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+.whale{
+    font-size:170px;
+    animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+    50%{transform:translateY(-20px);}
+}
+
+/* SECTION */
+section{
+    padding:70px 7%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.title h2{
+    color:#075985;
+    font-size:35px;
+}
+
+.title p{
+    margin-top:10px;
+    color:#64748b;
+}
+
+/* PRODUCTS */
+.products{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(3,105,161,.12);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+}
+
+.content{
+    padding:20px;
+}
+
+.content h3{
+    color:#075985;
+    margin-bottom:8px;
+}
+
+.content p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.price{
+    color:#0284c7;
+    font-size:21px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.buy{
+    width:100%;
+    border:0;
+    padding:13px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#0284c7,#0ea5e9);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* CART */
+.cart{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:min(400px,92%);
+    height:100vh;
+    background:white;
+    z-index:200;
+    padding:25px;
+    box-shadow:-10px 0 40px #0003;
+    transition:.35s;
+    overflow-y:auto;
+}
+
+.cart.active{
+    right:0;
+}
+
+.cart-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:0;
+    background:#e0f2fe;
+    color:#0369a1;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.item{
+    padding:15px 0;
+    border-bottom:1px solid #e2e8f0;
+}
+
+.item h4{
+    color:#075985;
+    margin-bottom:5px;
+}
+
+.qty{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-top:10px;
+}
+
+.qty button{
+    width:30px;
+    height:30px;
+    border:0;
+    border-radius:7px;
+    background:#e0f2fe;
+    color:#0369a1;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.total{
+    margin-top:25px;
+    padding:20px;
+    background:#eff9ff;
+    border-radius:15px;
+}
+
+.checkout{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    background:#16a34a;
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* INFO */
+.info{
+    background:#e0f2fe;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.info-box{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    text-align:center;
+}
+
+.info-box div{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.info-box h3{
+    color:#075985;
+    margin-bottom:8px;
+}
+
+.info-box p{
+    color:#64748b;
+    line-height:1.5;
+}
+
+/* FOOTER */
+footer{
+    padding:35px 20px;
+    text-align:center;
+    background:#062f4f;
+    color:white;
+}
+
+footer p{
+    color:#bae6fd;
+    margin-top:8px;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+    nav{
+        padding:15px 5%;
+    }
+
+    .hero{
+        text-align:center;
+        padding:70px 5%;
+    }
+
+    .whale{
+        display:none;
+    }
+
+    section{
+        padding:55px 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">
+        Iwak<span>Paus</span> 🐋
+    </div>
+
+    <button onclick="openCart()">
+        🛒 Keranjang (<span id="count">0</span>)
+    </button>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h1>
+            Explore The
+            <span>Ocean</span>
+        </h1>
+
+        <p>
+            Koleksi souvenir dan produk bertema ikan paus
+            dengan desain modern bernuansa biru.
+        </p>
+
+        <a href="#produk" class="hero-btn">
+            Lihat Produk →
+        </a>
+
+    </div>
+
+    <div class="whale">
+        🐋
+    </div>
+
+</section>
+
+
+<!-- PRODUK -->
+<section id="produk">
+
+    <div class="title">
+
+        <h2>Whale Collection</h2>
+
+        <p>
+            Pilih produk favoritmu
+        </p>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <!-- PRODUK 1 -->
+        <div class="card">
+
+            <img
+            src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80"
+            alt="Paus Biru">
+
+            <div class="content">
+
+                <h3>🐋 Blue Whale</h3>
+
+                <p>
+                    Produk souvenir bertema Paus Biru
+                    dengan desain lautan.
+                </p>
+
+                <div class="price">
+                    Rp25.000
+                </div>
+
+                <button
+                class="buy"
+                onclick="addCart('Blue Whale',25000)">
+                    🛒 Tambah ke Keranjang
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUK 2 -->
+        <div class="card">
+
+            <img
+            src="https://images.unsplash.com/photo-1607153333879-c174d265f1d2?auto=format&fit=crop&w=800&q=80"
+            alt="Paus Bungkuk">
+
+            <div class="content">
+
+                <h3>🌊 Humpback Whale</h3>
+
+                <p>
+                    Souvenir bertema Paus Bungkuk
+                    dengan nuansa biru laut.
+                </p>
+
+                <div class="price">
+                    Rp22.000
+                </div>
+
+                <button
+                class="buy"
+                onclick="addCart('Humpback Whale',22000)">
+                    🛒 Tambah ke Keranjang
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUK 3 -->
+        <div class="card">
+
+            <img
+            src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+            alt="Whale Ocean">
+
+            <div class="content">
+
+                <h3>🌊 Ocean Whale</h3>
+
+                <p>
+                    Koleksi souvenir dengan tema
+                    kehidupan paus di lautan.
+                </p>
+
+                <div class="price">
+                    Rp20.000
+                </div>
+
+                <button
+                class="buy"
+                onclick="addCart('Ocean Whale',20000)">
+                    🛒 Tambah ke Keranjang
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- PRODUK 4 -->
+        <div class="card">
+
+            <img
+            src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?auto=format&fit=crop&w=800&q=80"
+            alt="Orca">
+
+            <div class="content">
+
+                <h3>🐳 Orca Collection</h3>
+
+                <p>
+                    Produk souvenir bertema Orca
+                    dengan desain hitam putih.
+                </p>
+
+                <div class="price">
+                    Rp23.000
+                </div>
+
+                <button
+                class="buy"
+                onclick="addCart('Orca Collection',23000)">
+                    🛒 Tambah ke Keranjang
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INFO -->
+<section class="info">
+
+    <div class="title">
+
+        <h2>Kenapa IwakPaus?</h2>
+
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+
+            <div>🐋</div>
+
+            <h3>Whale Theme</h3>
+
+            <p>
+                Desain website terinspirasi
+                kehidupan laut dan ikan paus.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div>💙</div>
+
+            <h3>Modern Design</h3>
+
+            <p>
+                Menggunakan perpaduan warna
+                biru yang modern dan bersih.
+            </p>
+
+        </div>
+
+
+        <div class="info-box">
+
+            <div>📱</div>
+
+            <h3>Easy Checkout</h3>
+
+            <p>
+                Pesanan dapat dikirim langsung
+                melalui WhatsApp.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>🐋 IwakPaus</h3>
+
+    <p>
+        Whale-themed souvenir store
+    </p>
+
+    <p>
+        © 2026 IwakPaus
+    </p>
+
+</footer>
+
+
+<!-- CART -->
+<div class="cart" id="cart">
+
+    <div class="cart-head">
+
+        <h2>🛒 Keranjang</h2>
+
+        <button class="close" onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div id="cartItems">
+        Keranjang masih kosong.
+    </div>
+
+
+    <div class="total">
+
+        <p>Total Pesanan</p>
+
+        <h2 id="total">
+            Rp0
+        </h2>
+
+    </div>
+
+
+    <button
+    class="checkout"
+    onclick="checkout()">
+
+        💬 Checkout via WhatsApp
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   DATA KERANJANG
+========================= */
+
+let cart = [];
+
+
+/* =========================
+   TAMBAH PRODUK
+========================= */
+
+function addCart(name, price){
+
+    let item = cart.find(
+        product => product.name === name
+    );
+
+    if(item){
+
+        item.qty++;
+
+    }else{
+
+        cart.push({
+            name:name,
+            price:price,
+            qty:1
+        });
+
+    }
+
+    updateCart();
+
+    openCart();
+}
+
+
+/* =========================
+   UPDATE KERANJANG
+========================= */
+
+function updateCart(){
+
+    let container =
+        document.getElementById("cartItems");
+
+    let totalElement =
+        document.getElementById("total");
+
+    let countElement =
+        document.getElementById("count");
+
+    container.innerHTML = "";
+
+    let total = 0;
+    let count = 0;
+
+
+    if(cart.length === 0){
+
+        container.innerHTML =
+            "<p>Keranjang masih kosong.</p>";
+
+    }
+
+
+    cart.forEach((item,index)=>{
+
+        let subtotal =
+            item.price * item.qty;
+
+        total += subtotal;
+
+        count += item.qty;
+
+
+        container.innerHTML += `
+
+        <div class="item">
+
+            <h4>🐋 ${item.name}</h4>
+
+            <p>
+                Rp${format(item.price)}
+            </p>
+
+            <div class="qty">
+
+                <button
+                onclick="minus(${index})">
+                    −
+                </button>
+
+                <b>${item.qty}</b>
+
+                <button
+                onclick="plus(${index})">
+                    +
+                </button>
+
+                <button
+                onclick="removeItem(${index})"
+                style="
+                margin-left:auto;
+                background:#fee2e2;
+                color:#dc2626;
+                ">
+                    🗑
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    totalElement.innerText =
+        "Rp" + format(total);
+
+    countElement.innerText =
+        count;
+}
+
+
+/* =========================
+   TAMBAH JUMLAH
+========================= */
+
+function plus(index){
+
+    cart[index].qty++;
+
+    updateCart();
+}
+
+
+/* =========================
+   KURANG JUMLAH
+========================= */
+
+function minus(index){
+
+    if(cart[index].qty > 1){
+
+        cart[index].qty--;
+
+    }else{
+
+        cart.splice(index,1);
+
+    }
+
+    updateCart();
+}
+
+
+/* =========================
+   HAPUS
+========================= */
+
+function removeItem(index){
+
+    cart.splice(index,1);
+
+    updateCart();
+}
+
+
+/* =========================
+   FORMAT RUPIAH
+========================= */
+
+function format(number){
+
+    return number.toLocaleString("id-ID");
+
+}
+
+
+/* =========================
+   BUKA CART
+========================= */
+
+function openCart(){
+
+    document
+    .getElementById("cart")
+    .classList
+    .add("active");
+
+}
+
+
+/* =========================
+   TUTUP CART
+========================= */
+
+function closeCart(){
+
+    document
+    .getElementById("cart")
+    .classList
+    .remove("active");
+
+}
+
+
+/* =========================
+   CHECKOUT WHATSAPP
+========================= */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        alert(
+            "Keranjang masih kosong!"
+        );
+
+        return;
+    }
+
+
+    /*
+    ==================================
+    GANTI NOMOR INI
+    ==================================
+
+    Contoh nomor:
+    081234567890
+
+    Ditulis menjadi:
+    6281234567890
+
+    Jangan menggunakan:
+    +62
+    08
+    spasi
+    tanda -
+    */
+
+    const phone =
+        "6283866291788";
+
+
+    let message =
+        "Halo IwakPaus! 👋\n\n" +
+        "Saya ingin memesan:\n\n";
+
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        let subtotal =
+            item.price * item.qty;
+
+        total += subtotal;
+
+
+        message +=
+            "🐋 " +
+            item.name +
+            " x" +
+            item.qty +
+            " = Rp" +
+            format(subtotal) +
+            "\n";
+
+    });
+
+
+    message +=
+        "\n💰 Total: Rp" +
+        format(total);
+
+
+    message +=
+        "\n\nMohon konfirmasi pesanan saya.";
+
+
+    /*
+    Encode pesan agar aman
+    digunakan pada URL WhatsApp
+    */
+
+    const whatsappURL =
+        "https://wa.me/" +
+        phone +
+        "?text=" +
+        encodeURIComponent(message);
+
+
+    /*
+    Membuka WhatsApp
+    */
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+
+updateCart();
+
+</script>
+
+</body>
+  </html>
